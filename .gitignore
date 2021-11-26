@@ -332,3 +332,4 @@ fastlane/test_output
 
 iOSInjectionProject/
 
+*.lock
