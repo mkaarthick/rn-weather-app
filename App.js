@@ -9,12 +9,12 @@
 import React from 'react';
 
 import {SafeAreaView, StyleSheet} from 'react-native';
-import {CityList} from './src/screens/CityList';
+import {Dashboard} from './src/screens/Dashboard';
 
 const App = () => {
   return (
     <SafeAreaView style={styles.flexContainer}>
-      <CityList />
+      <Dashboard />
     </SafeAreaView>
   );
 };
