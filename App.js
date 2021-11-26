@@ -7,15 +7,15 @@
  */
 
 import React from 'react';
-
-import {SafeAreaView, StyleSheet} from 'react-native';
-import {Dashboard} from './src/screens/Dashboard';
+import {View, StyleSheet, StatusBar} from 'react-native';
+import AppNavigation from './src/navigation/AppNavigation';
 
 const App = () => {
   return (
-    <SafeAreaView style={styles.flexContainer}>
-      <Dashboard />
-    </SafeAreaView>
+    <View style={styles.flexContainer}>
+      <StatusBar barStyle="light-content" />
+      <AppNavigation />
+    </View>
   );
 };
 const styles = StyleSheet.create({
