@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, {useCallback, useEffect} from 'react';
 import {FlatList, View, StyleSheet} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
@@ -9,13 +10,13 @@ import Metrics from '../components/Metrics';
 const renderSeparator = () => <View style={styles.separatorStyle} />;
 
 const CityList = ({selectedCity}) => {
-  console.log('render CityList');
   const dispatch = useDispatch();
   const cities = useSelector(selectCities);
+  console.log('render CityList', cities);
 
   useEffect(() => {
     dispatch(getCurrentWeather());
-  }, [dispatch]);
+  }, []);
 
   const onListItemClick = useCallback(
     city => {
@@ -25,7 +26,6 @@ const CityList = ({selectedCity}) => {
   );
   const renderItem = ({item}) => {
     const {name, current} = item;
-    console.log('item', item);
     return (
       <ListItem
         name={name}

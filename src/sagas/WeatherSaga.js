@@ -5,33 +5,18 @@ import {
   getCurrentWeather,
   selectCities,
   setCurrentWeather,
+  setForecastWeather,
 } from '../redux/WeatherState';
 import {Network} from '../api/Network';
+import {formWeatherData, handleForeCastResponse} from '../utils/WeatherUtils';
 
 function* handleCurrentWeatherRequest(city) {
   try {
     console.log('saga', city);
-    const weatherResponse = yield call(Network.getWeather, {
-      units: 'metric',
-      APPID: Config.WEATHER_API_kEY,
-      q: city,
-    });
+    const weatherResponse = yield call(Network.getWeather, city);
     const {data} = weatherResponse;
     if (data.cod === Number(200)) {
-      const info = data.weather[0];
-      const details = data.main;
-
-      const weatherData = {
-        id: info?.id,
-        desc: info?.description,
-        temp: details?.temp,
-        min_temp: details?.temp_min,
-        max_temp: details?.temp_max,
-        pressure: details?.pressure,
-        humidity: details?.humidity,
-        wind: data?.wind,
-      };
-
+      const weatherData = formWeatherData(data);
       yield put(setCurrentWeather({city, weatherData}));
     } else {
       //error
@@ -42,13 +27,11 @@ function* handleCurrentWeatherRequest(city) {
 }
 function* handleForecastRequest(city) {
   try {
-    const forecastResponse = yield call(Network.getForecast, {
-      units: 'metric',
-      APPID: Config.WEATHER_API_kEY,
-      q: city,
-    });
+    const forecastResponse = yield call(Network.getForecast, city);
     const {data} = forecastResponse;
     if (data.cod === '200') {
+      const weatherData = handleForeCastResponse(data.list);
+      yield put(setForecastWeather({city, weatherData}));
     } else {
       //error
     }
@@ -83,7 +66,7 @@ export function* watcherWeatherSaga() {
     const cities = yield select(selectCities);
     for (let i = 0; i < cities.length; i++) {
       yield fork(handleCurrentWeatherRequest, cities[i].name);
-      yield fork(handleCityImageRequest, cities[i].name);
+      // yield fork(handleCityImageRequest, cities[i].name);
       yield fork(handleForecastRequest, cities[i].name);
     }
   }
