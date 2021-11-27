@@ -6,13 +6,13 @@ export const weatherState = createSlice({
     metrics: 'c',
     activePage: 0,
     cities: [
-      {name: 'Cuddalore', current: null, forecast: null},
-      {name: 'Singapore', current: null, forecast: null},
-      {name: 'New York', current: null, forecast: null},
-      {name: 'Miami', current: null, forecast: null},
-      {name: 'Tokyo', current: null, forecast: null},
-      {name: 'Cairo', current: null, forecast: null},
-      {name: 'Reykjavík', current: null, forecast: null},
+      {name: 'Cuddalore', current: null, forecast: null, image: null},
+      {name: 'Singapore', current: null, forecast: null, image: null},
+      {name: 'New York', current: null, forecast: null, image: null},
+      {name: 'Miami', current: null, forecast: null, image: null},
+      {name: 'Tokyo', current: null, forecast: null, image: null},
+      {name: 'Cairo', current: null, forecast: null, image: null},
+      {name: 'Reykjavík', current: null, forecast: null, image: null},
     ],
   },
   reducers: {
@@ -63,6 +63,23 @@ export const weatherState = createSlice({
         activePage: action.payload,
       };
     },
+    setImage: (state, action) => {
+      return {
+        ...state,
+        cities: state.cities.map(item => {
+          if (item.name === action.payload.city) {
+            return {
+              ...item,
+              image: action.payload.imageURL,
+            };
+          } else {
+            return {
+              ...item,
+            };
+          }
+        }),
+      };
+    },
   },
 });
 
@@ -78,6 +95,7 @@ export const {
   setCurrentWeather,
   setForecastWeather,
   setActivePage,
+  setImage,
 } = weatherState.actions;
 
 export default weatherState.reducer;

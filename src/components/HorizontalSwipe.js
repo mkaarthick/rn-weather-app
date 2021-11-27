@@ -1,13 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react';
 import {Animated, Dimensions, StyleSheet, View} from 'react-native';
-import {Text} from 'react-native-paper';
 import {ExpandingDot} from 'react-native-animated-pagination-dots';
 import PagerView from 'react-native-pager-view';
 import {VerticalSwipe} from './VerticalSwipe';
 import {useSelector} from 'react-redux';
-import {selectActivePage, selectCities} from '../redux/WeatherState';
+import { selectCities} from '../redux/WeatherState';
 import {Forecast} from './Forecast';
+import CityName from './CityName';
 const INTRO_DATA = [
   {
     key: '1',
@@ -26,7 +26,6 @@ const AnimatedPagerView = Animated.createAnimatedComponent(PagerView);
 const width = Dimensions.get('window').width;
 export const HorizontalSwipe = () => {
   const cities = useSelector(selectCities);
-  const activePage = useSelector(selectActivePage);
 
   console.log('cities', cities);
   const ref = React.useRef();
@@ -60,8 +59,7 @@ export const HorizontalSwipe = () => {
     <View style={{flex: 1}}>
       <View style={styles.dotsContainer}>
         <View style={styles.dotContainer}>
-          <Text style={{fontSize: 18}}>New York</Text>
-
+          <CityName />
           <ExpandingDot
             data={INTRO_DATA}
             expandingDotWidth={20}

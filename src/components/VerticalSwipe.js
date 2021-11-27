@@ -1,9 +1,9 @@
 import React, {useRef} from 'react';
-import {StyleSheet, View, Text, Image, Animated} from 'react-native';
+import {StyleSheet, Animated} from 'react-native';
 import PagerView from 'react-native-pager-view';
 import {useDispatch, useSelector} from 'react-redux';
 import {selectCities, setActivePage} from '../redux/WeatherState';
-import {getArtResourceForWeatherCondition} from '../utils/WeatherUtils';
+import CurrentWeather from './CurrentWeather';
 
 export const VerticalSwipe = () => {
   const dispatch = useDispatch();
@@ -21,14 +21,7 @@ export const VerticalSwipe = () => {
       ],
       {
         listener: ({nativeEvent: {position}}) => {
-          // addLog({
-          //   event: 'select',
-          //   text: `Page: ${position}`,
-          //   timestamp: new Date(),
-          // });
-          // setActivePage(position);
           dispatch(setActivePage(position));
-          // onPageSelectedCallback(position);
           console.log('page', `Page: ${position}`);
         },
         useNativeDriver: false,
@@ -44,26 +37,15 @@ export const VerticalSwipe = () => {
       orientation={'vertical'}>
       {cities.map((item, index) => {
         return (
-          <View key={index}>
-            <View style={styles.center}>
-              <Image
-                style={{width: 80, height: 80}}
-                source={getArtResourceForWeatherCondition(item.current.id)}
-              />
-              <Text style={{fontSize: 80}}>35</Text>
-              <Text>{item.current.desc}</Text>
-              <Text>{item.name}</Text>
-            </View>
-            <View
-              style={{
-                flexDirection: 'row',
-                justifyContent: 'space-evenly',
-              }}>
-              <Text>Image</Text>
-              <Text>Image</Text>
-              <Text>Image</Text>
-            </View>
-          </View>
+          <CurrentWeather
+            key={index}
+            weatherId={item?.current.id}
+            temp={item?.current.temp}
+            desc={item?.current.desc}
+            min={item?.current.min_temp}
+            max={item?.current.max_temp}
+            humidity={item?.current.humidity}
+          />
         );
       })}
     </PagerView>
@@ -78,11 +60,5 @@ const styles = StyleSheet.create({
     // backgroundColor: 'red',
     position: 'absolute',
     // zIndex: 0,
-  },
-  center: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    alignContent: 'center',
-    padding: 20,
   },
 });

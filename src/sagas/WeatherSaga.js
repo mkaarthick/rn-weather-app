@@ -6,6 +6,7 @@ import {
   selectCities,
   setCurrentWeather,
   setForecastWeather,
+  setImage,
 } from '../redux/WeatherState';
 import {Network} from '../api/Network';
 import {formWeatherData, handleForeCastResponse} from '../utils/WeatherUtils';
@@ -50,8 +51,8 @@ function* handleCityImageRequest(city) {
     });
     const {data} = cityResponse;
     if (data.results) {
-      const image_url = data.results[0].urls.small;
-      console.log('results', image_url);
+      const imageURL = data.results[0].urls.small;
+      yield put(setImage({city, imageURL}));
     } else {
       //error
     }
@@ -66,7 +67,7 @@ export function* watcherWeatherSaga() {
     const cities = yield select(selectCities);
     for (let i = 0; i < cities.length; i++) {
       yield fork(handleCurrentWeatherRequest, cities[i].name);
-      // yield fork(handleCityImageRequest, cities[i].name);
+      yield fork(handleCityImageRequest, cities[i].name);
       yield fork(handleForecastRequest, cities[i].name);
     }
   }
