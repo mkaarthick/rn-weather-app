@@ -1,12 +1,21 @@
-import React, {useCallback} from 'react';
+import React, {useCallback, useEffect} from 'react';
 import {FlatList, View, StyleSheet} from 'react-native';
+import {useDispatch, useSelector} from 'react-redux';
 
 import ListItem from '../components/Listitem';
+import {getCurrentWeather, selectCities} from '../redux/WeatherState';
+import Metrics from '../components/Metrics';
 
 const renderSeparator = () => <View style={styles.separatorStyle} />;
 
 const CityList = ({selectedCity}) => {
   console.log('render CityList');
+  const dispatch = useDispatch();
+  const cities = useSelector(selectCities);
+
+  useEffect(() => {
+    dispatch(getCurrentWeather());
+  }, [dispatch]);
 
   const onListItemClick = useCallback(
     city => {
@@ -15,11 +24,14 @@ const CityList = ({selectedCity}) => {
     [selectedCity],
   );
   const renderItem = ({item}) => {
+    const {name, current} = item;
+    console.log('item', item);
     return (
       <ListItem
-        name={item.name}
-        description={item.description}
-        temp={item.temp}
+        name={name}
+        description={current?.desc}
+        temp={current?.temp}
+        weatherId={current?.id}
         onPress={onListItemClick}
       />
     );
@@ -27,14 +39,12 @@ const CityList = ({selectedCity}) => {
   return (
     <View style={styles.container}>
       <FlatList
-        data={[
-          {name: 'Singapore', temp: '30', description: 'cloudy'},
-          {name: 'New York', temp: '50', description: 'rain'},
-        ]}
+        data={cities}
         renderItem={renderItem}
         keyExtractor={item => item.name}
         ItemSeparatorComponent={renderSeparator}
       />
+      <Metrics />
     </View>
   );
 };

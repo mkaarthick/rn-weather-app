@@ -1,20 +1,31 @@
 import React from 'react';
-import {View, StyleSheet, Text, Pressable} from 'react-native';
+import {Text, View, Pressable, StyleSheet} from 'react-native';
+import {useSelector} from 'react-redux';
 
-const ListItem = ({name, description, temp, onPress}) => {
+import WeatherIcon from './WeatherIcon';
+import {convertToFahrenheit} from '../utils/WeatherUtils';
+import {selectIsCelsius} from '../redux/WeatherState';
+
+const ListItem = ({name, description, temp, weatherId, onPress}) => {
+  console.log('render ListItem');
+  const isCelsiusSelected = useSelector(selectIsCelsius);
+
   const onClick = () => onPress(name);
   console.log('render CityList');
 
   return (
-    <Pressable
-      style={styles.container}
-      onPress={onClick}
-    >
-      <Text style={styles.tempStyle}>{temp}°</Text>
+    <Pressable style={styles.container} onPress={onClick}>
+      <Text style={styles.tempStyle}>
+        {isCelsiusSelected
+          ? Math.floor(temp)
+          : Math.floor(convertToFahrenheit(temp))}
+        °
+      </Text>
       <View style={styles.titleContainer}>
         <Text style={styles.titleStyle}>{name}</Text>
         <Text style={styles.descriptionStyle}>{description}</Text>
       </View>
+      <WeatherIcon type={weatherId} />
     </Pressable>
   );
 };

@@ -13,9 +13,30 @@ export const weatherState = createSlice({
     ],
   },
   reducers: {
-    setMetrics: (state, action) => {},
+    setMetrics: (state, action) => {
+      return {
+        ...state,
+        metrics: action.payload,
+      };
+    },
     getCurrentWeather: state => {},
-    setCurrentWeather: (state, action) => {},
+    setCurrentWeather: (state, action) => {
+      return {
+        ...state,
+        cities: state.cities.map(item => {
+          if (item.name === action.payload.city) {
+            return {
+              ...item,
+              current: action.payload.weatherData,
+            };
+          } else {
+            return {
+              ...item,
+            };
+          }
+        }),
+      };
+    },
   },
 });
 
