@@ -1,7 +1,18 @@
-import React from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, {useEffect} from 'react';
 import {View, Image} from 'react-native';
+import {Surface} from 'react-native-paper';
+import {useDispatch} from 'react-redux';
 
-export const Dashboard = ({navigation}) => {
+import {HorizontalSwipe} from '../components/HorizontalSwipe';
+import {getCurrentWeather} from '../redux/WeatherState';
+
+export const Dashboard = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getCurrentWeather());
+  }, []);
   return (
     <View style={{flex: 1}}>
       <View style={{height: '25%', backgroundColor: '#454856'}}>
@@ -15,7 +26,7 @@ export const Dashboard = ({navigation}) => {
         />
       </View>
       <View style={{justifyContent: 'center', alignItems: 'center'}}>
-        <View
+        <Surface
           style={{
             width: 100,
             height: 100,
@@ -30,8 +41,9 @@ export const Dashboard = ({navigation}) => {
               uri: 'https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyNzY0OTV8MHwxfHNlYXJjaHwxfHxuZXclMjB5b3JrfGVufDB8MHx8fDE2MzcyMTcyMTc&ixlib=rb-1.2.1&q=80&w=400',
             }}
           />
-        </View>
+        </Surface>
       </View>
+      <HorizontalSwipe />
     </View>
   );
 };

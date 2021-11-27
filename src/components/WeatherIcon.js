@@ -3,14 +3,18 @@ import {Image, StyleSheet} from 'react-native';
 import {Surface} from 'react-native-paper';
 import {getArtResourceForWeatherCondition} from '../utils/WeatherUtils';
 
-const WeatherIcon = ({type}) => {
+const WeatherIcon = ({type, shadow}) => {
   console.log('render icon');
   const id = getArtResourceForWeatherCondition(type);
-  return (
-    <Surface style={styles.surfaceContainer}>
-      <Image source={id} style={styles.imageStyle} />
-    </Surface>
-  );
+  if (shadow) {
+    return (
+      <Surface style={styles.surfaceContainer}>
+        <Image source={id} style={styles.imageStyle} />
+      </Surface>
+    );
+  } else {
+    return <Image source={id} style={styles.imageStyle} />;
+  }
 };
 const styles = StyleSheet.create({
   surfaceContainer: {

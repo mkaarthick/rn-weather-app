@@ -1,22 +1,17 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, {useCallback, useEffect} from 'react';
+import React, {useCallback} from 'react';
 import {FlatList, View, StyleSheet} from 'react-native';
-import {useDispatch, useSelector} from 'react-redux';
+import {useSelector} from 'react-redux';
 
 import ListItem from '../components/Listitem';
-import {getCurrentWeather, selectCities} from '../redux/WeatherState';
+import {selectCities} from '../redux/WeatherState';
 import Metrics from '../components/Metrics';
 
 const renderSeparator = () => <View style={styles.separatorStyle} />;
 
 const CityList = ({selectedCity}) => {
-  const dispatch = useDispatch();
   const cities = useSelector(selectCities);
   console.log('render CityList', cities);
-
-  useEffect(() => {
-    dispatch(getCurrentWeather());
-  }, []);
 
   const onListItemClick = useCallback(
     city => {

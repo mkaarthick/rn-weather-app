@@ -4,6 +4,7 @@ export const weatherState = createSlice({
   name: 'weather',
   initialState: {
     metrics: 'c',
+    activePage: 0,
     cities: [
       {name: 'Cuddalore', current: null, forecast: null},
       {name: 'Singapore', current: null, forecast: null},
@@ -56,12 +57,19 @@ export const weatherState = createSlice({
         }),
       };
     },
+    setActivePage: (state, action) => {
+      return {
+        ...state,
+        activePage: action.payload,
+      };
+    },
   },
 });
 
 //Selectors
 export const selectCities = state => state.weather.cities;
 export const selectIsCelsius = state => state.weather.metrics === 'c';
+export const selectActivePage = state => state.weather.activePage;
 
 //Actions
 export const {
@@ -69,6 +77,7 @@ export const {
   getCurrentWeather,
   setCurrentWeather,
   setForecastWeather,
+  setActivePage,
 } = weatherState.actions;
 
 export default weatherState.reducer;
