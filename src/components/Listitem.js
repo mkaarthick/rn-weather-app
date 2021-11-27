@@ -1,15 +1,21 @@
 import React from 'react';
-import {View, StyleSheet, Text} from 'react-native';
+import {View, StyleSheet, Text, Pressable} from 'react-native';
 
-const ListItem = ({name, description, temp}) => {
+const ListItem = ({name, description, temp, onPress}) => {
+  const onClick = () => onPress(name);
+  console.log('render CityList');
+
   return (
-    <View style={styles.container}>
+    <Pressable
+      style={styles.container}
+      onPress={onClick}
+    >
       <Text style={styles.tempStyle}>{temp}°</Text>
       <View style={styles.titleContainer}>
         <Text style={styles.titleStyle}>{name}</Text>
         <Text style={styles.descriptionStyle}>{description}</Text>
       </View>
-    </View>
+    </Pressable>
   );
 };
 
