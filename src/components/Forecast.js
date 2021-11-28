@@ -51,7 +51,7 @@ export const Forecast = () => {
     );
   };
   return (
-    <View style={{flex: 1}}>
+    <View style={styles.flatlistContainer}>
       <FlatList
         showsVerticalScrollIndicator={false}
         data={data}
@@ -94,5 +94,9 @@ const styles = StyleSheet.create({
   tempStyle: {
     fontSize: 14,
     fontWeight: '500',
+  },
+  flatlistContainer: {
+    flex: 1,
+    marginTop: 32,
   },
 });

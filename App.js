@@ -6,8 +6,8 @@
  * @flow strict-local
  */
 
-import React from 'react';
-import {View, StyleSheet, StatusBar} from 'react-native';
+import React, {useEffect} from 'react';
+import {View, StyleSheet, StatusBar, LogBox} from 'react-native';
 import {Provider as StoreProvider} from 'react-redux';
 import {
   configureFonts,
@@ -23,6 +23,9 @@ const theme = {
   fonts: configureFonts(fontConfig),
 };
 const App = () => {
+  useEffect(() => {
+    LogBox.ignoreAllLogs();
+  }, []);
   return (
     <StoreProvider store={store}>
       <PaperProvider theme={theme}>
