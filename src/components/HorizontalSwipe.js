@@ -49,15 +49,8 @@ export const HorizontalSwipe = () => {
             expandingDotWidth={20}
             scrollX={scrollX}
             inActiveDotOpacity={0.6}
-            dotStyle={{
-              width: 5,
-              height: 5,
-              borderRadius: 5,
-              marginHorizontal: 2,
-            }}
-            containerStyle={{
-              top: 30,
-            }}
+            dotStyle={styles.dot}
+            containerStyle={styles.containerStyle}
           />
         </View>
       </View>
@@ -104,5 +97,15 @@ const styles = StyleSheet.create({
   dotContainer: {
     justifyContent: 'center',
     alignSelf: 'center',
+  },
+  dot: {
+    width: 5,
+    height: 5,
+    borderRadius: 5,
+    marginTop: 5,
+    marginHorizontal: 2,
+  },
+  containerStyle: {
+    top: 30,
   },
 });

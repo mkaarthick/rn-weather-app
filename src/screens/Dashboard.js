@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, {useEffect} from 'react';
-import {View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import {ActivityIndicator, Surface} from 'react-native-paper';
 import {useDispatch, useSelector} from 'react-redux';
 
@@ -17,25 +17,18 @@ export const Dashboard = () => {
   }, []);
   if (isLoading) {
     return (
-      <View style={{justifyContent: 'center', alignItems: 'center', flex: 1}}>
+      <View style={styles.loaderContainer}>
         <ActivityIndicator />
       </View>
     );
   } else {
     return (
-      <View style={{flex: 1}}>
-        <View style={{height: '25%', backgroundColor: '#454856'}}>
+      <View style={styles.flexStyle}>
+        <View style={styles.blurContainer}>
           <CityImage blur={true} />
         </View>
-        <View style={{justifyContent: 'center', alignItems: 'center'}}>
-          <Surface
-            style={{
-              width: 100,
-              height: 100,
-              borderRadius: 100 / 2,
-              position: 'absolute',
-              elevation: 12,
-            }}>
+        <View style={styles.imageContainer}>
+          <Surface style={styles.surface}>
             <CityImage />
           </Surface>
         </View>
@@ -44,3 +37,28 @@ export const Dashboard = () => {
     );
   }
 };
+const styles = StyleSheet.create({
+  flexStyle: {
+    flex: 1,
+  },
+  loaderContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    flex: 1,
+  },
+  imageContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  surface: {
+    width: 100,
+    height: 100,
+    borderRadius: 100 / 2,
+    position: 'absolute',
+    elevation: 12,
+  },
+  blurContainer: {
+    height: '25%',
+    backgroundColor: '#454856',
+  },
+});
