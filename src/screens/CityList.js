@@ -1,20 +1,23 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, {useCallback} from 'react';
 import {FlatList, View, StyleSheet} from 'react-native';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 
 import ListItem from '../components/Listitem';
-import {selectCities} from '../redux/WeatherState';
+import {selectCities, setActivePage} from '../redux/WeatherState';
 import Metrics from '../components/Metrics';
 
 const renderSeparator = () => <View style={styles.separatorStyle} />;
 
 const CityList = ({selectedCity}) => {
+  const dispatch = useDispatch();
   const cities = useSelector(selectCities);
 
   const onListItemClick = useCallback(
     city => {
       selectedCity(city);
+      const post = cities.findIndex(element => element.name === city);
+      dispatch(setActivePage(post));
     },
     [selectedCity],
   );

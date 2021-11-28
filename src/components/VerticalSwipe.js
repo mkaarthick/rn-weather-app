@@ -1,14 +1,20 @@
-import React, {useRef} from 'react';
+import React, {useRef, useEffect} from 'react';
 import {StyleSheet, Animated, View} from 'react-native';
 import PagerView from 'react-native-pager-view';
 import {useDispatch, useSelector} from 'react-redux';
-import {selectCities, setActivePage} from '../redux/WeatherState';
+import {
+  selectActivePage,
+  selectCities,
+  setActivePage,
+} from '../redux/WeatherState';
 import CurrentWeather from './CurrentWeather';
 
 export const VerticalSwipe = () => {
   const dispatch = useDispatch();
   const cities = useSelector(selectCities);
+  const activePage = useSelector(selectActivePage);
   const onPageSelectedPosition = useRef(new Animated.Value(0)).current;
+  const verticalViewPager = useRef();
 
   const onPageSelected = React.useMemo(function () {
     return Animated.event(
@@ -29,8 +35,12 @@ export const VerticalSwipe = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  useEffect(() => {
+    verticalViewPager?.current?.setPageWithoutAnimation(activePage);
+  }, [activePage]);
   return (
     <PagerView
+      ref={verticalViewPager}
       style={styles.pagerView}
       initialPage={0}
       onPageSelected={onPageSelected}
