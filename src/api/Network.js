@@ -1,12 +1,12 @@
 import API from './ApiConfig';
-import Config from 'react-native-config';
+import {APP_ID, UNSPLASH_ID} from '../utils/AppConstants';
 
 export const Network = {
   getForecast: city =>
     API.get('/forecast', {
       params: {
         units: 'metric',
-        APPID: Config.WEATHER_API_kEY,
+        APPID: APP_ID,
         q: city,
       },
     }),
@@ -14,7 +14,7 @@ export const Network = {
     API.get('/weather', {
       params: {
         units: 'metric',
-        APPID: Config.WEATHER_API_kEY,
+        APPID: APP_ID,
         q: city,
       },
     }),
@@ -22,7 +22,7 @@ export const Network = {
     API.get('https://api.unsplash.com/search/photos', {
       params: {
         query: city,
-        client_id: Config.UNSPLASH_KEY,
+        client_id: UNSPLASH_ID,
         orientation: 'landscape',
         per_page: 1,
       },
