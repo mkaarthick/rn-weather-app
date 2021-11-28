@@ -16,33 +16,29 @@ const CurrentWeather = ({
   return (
     <View>
       <View style={styles.center}>
-        <Image style={{width: 120, height: 120}} source={imgSrc} />
-        <Text style={{fontSize: 50}}>{Math.floor(temp)}°</Text>
+        <Image style={styles.weatherIconStyle} source={imgSrc} />
+        <Text style={styles.tempStyle}>{Math.floor(temp)}°</Text>
         <Text>{desc}</Text>
         <Text>
           {Math.floor(min)}° {Math.floor(max)}°
         </Text>
       </View>
-      <View
-        style={{
-          flexDirection: 'row',
-          justifyContent: 'space-around',
-        }}>
-        <View style={{alignItems: 'center'}}>
+      <View style={styles.bottomContainer}>
+        <View style={styles.bottomDetails}>
           <Image
             style={styles.iconStyle}
             source={require('../assets/icon_pressure.png')}
           />
           <Text style={styles.otherStyle}>{pressure} hPa</Text>
         </View>
-        <View style={{alignItems: 'center'}}>
+        <View style={styles.bottomDetails}>
           <Image
             style={styles.iconStyle}
             source={require('../assets/icon_drop.png')}
           />
           <Text style={styles.otherStyle}>{humidity}%</Text>
         </View>
-        <View style={{alignItems: 'center'}}>
+        <View style={styles.bottomDetails}>
           <Image
             style={styles.iconStyle}
             source={require('../assets/icon_wind.png')}
@@ -65,6 +61,20 @@ const styles = StyleSheet.create({
   iconStyle: {
     width: 32,
     height: 32,
+  },
+  weatherIconStyle: {
+    width: 120,
+    height: 120,
+  },
+  tempStyle: {
+    fontSize: 50,
+  },
+  bottomContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+  },
+  bottomDetails: {
+    alignItems: 'center',
   },
 });
 export default React.memo(CurrentWeather);

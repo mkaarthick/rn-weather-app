@@ -39,6 +39,7 @@ const CityList = ({selectedCity}) => {
         renderItem={renderItem}
         keyExtractor={item => item.name}
         animationType={AnimationType.SlideFromRight}
+        showsVerticalScrollIndicator={false}
       />
       <Metrics />
     </View>

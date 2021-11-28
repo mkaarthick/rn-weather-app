@@ -36,6 +36,7 @@ export const Forecast = () => {
   return (
     <View style={{flex: 1}}>
       <FlatList
+        showsVerticalScrollIndicator={false}
         data={data}
         renderItem={renderItem}
         keyExtractor={item => item.date}

@@ -1,5 +1,5 @@
 import React, {useState, useCallback} from 'react';
-import {Image, Pressable, View} from 'react-native';
+import {Image, Pressable, View, StyleSheet} from 'react-native';
 import Modal from 'react-native-modal';
 import CityList from '../screens/CityList';
 import {useSelector} from 'react-redux';
@@ -30,23 +30,20 @@ export const HeaderLeft = () => {
   return (
     <View>
       <Pressable onPress={toggleModal}>
-        <Image
-          source={require('../assets/menu.png')}
-          style={{width: 25, height: 25}}
-        />
+        <Image source={require('../assets/menu.png')} style={styles.menu} />
       </Pressable>
       <Modal
-        style={{margin: 0}}
+        style={styles.modalStyle}
         isVisible={isModalVisible}
         animationIn={'slideInLeft'}
         animationOut={'slideOutLeft'}
         hasBackdrop={false}
         onModalShow={onModalShow}>
-        <View style={{flex: 1, backgroundColor: '#F2F2F2', paddingTop: 16}}>
+        <View style={styles.modalContainer}>
           <Pressable onPress={toggleModal}>
             <Image
               source={require('../assets/menu_black.png')}
-              style={{width: 25, height: 25, margin: 16}}
+              style={styles.menuBlack}
             />
           </Pressable>
           {focused && <CityList selectedCity={handleSelectedCity} />}
@@ -55,3 +52,23 @@ export const HeaderLeft = () => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  modalStyle: {
+    margin: 0,
+  },
+  modalContainer: {
+    flex: 1,
+    backgroundColor: '#F2F2F2',
+    paddingTop: 16,
+  },
+  menu: {
+    width: 25,
+    height: 25,
+  },
+  menuBlack: {
+    width: 25,
+    height: 25,
+    margin: 16,
+  },
+});
