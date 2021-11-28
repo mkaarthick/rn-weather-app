@@ -62,11 +62,11 @@ const styles = StyleSheet.create({
   },
   selectedStyle: {
     color: 'black',
-    fontWeight: '700',
+    fontFamily: 'ProximaNova-Semibold',
   },
   unSelectedStyle: {
-    color: 'black',
-    fontWeight: 'normal',
+    color: 'grey',
+    fontFamily: 'ProximaNova-regular',
   },
 });
 export default React.memo(Metrics);
