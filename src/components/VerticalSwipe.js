@@ -1,5 +1,5 @@
 import React, {useRef} from 'react';
-import {StyleSheet, Animated} from 'react-native';
+import {StyleSheet, Animated, View} from 'react-native';
 import PagerView from 'react-native-pager-view';
 import {useDispatch, useSelector} from 'react-redux';
 import {selectCities, setActivePage} from '../redux/WeatherState';
@@ -22,13 +22,13 @@ export const VerticalSwipe = () => {
       {
         listener: ({nativeEvent: {position}}) => {
           dispatch(setActivePage(position));
-          console.log('page', `Page: ${position}`);
         },
         useNativeDriver: false,
       },
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
   return (
     <PagerView
       style={styles.pagerView}
@@ -37,15 +37,16 @@ export const VerticalSwipe = () => {
       orientation={'vertical'}>
       {cities.map((item, index) => {
         return (
-          <CurrentWeather
-            key={index}
-            weatherId={item?.current.id}
-            temp={item?.current.temp}
-            desc={item?.current.desc}
-            min={item?.current.min_temp}
-            max={item?.current.max_temp}
-            humidity={item?.current.humidity}
-          />
+          <View key={index.toString()}>
+            <CurrentWeather
+              weatherId={item?.current.id}
+              temp={item?.current.temp}
+              desc={item?.current.desc}
+              min={item?.current.min_temp}
+              max={item?.current.max_temp}
+              humidity={item?.current.humidity}
+            />
+          </View>
         );
       })}
     </PagerView>

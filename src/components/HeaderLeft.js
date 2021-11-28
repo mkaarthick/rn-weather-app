@@ -5,15 +5,12 @@ import CityList from '../screens/CityList';
 
 export const HeaderLeft = () => {
   const [isModalVisible, setModalVisible] = useState(false);
-  console.log('render HeaderLeft');
   const toggleModal = useCallback(() => {
     setModalVisible(!isModalVisible);
   }, [isModalVisible]);
 
   const handleSelectedCity = useCallback(city => {
-    console.log(city);
     setModalVisible(false);
-    // alert(city)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
@@ -30,7 +27,7 @@ export const HeaderLeft = () => {
         animationIn={'slideInLeft'}
         animationOut={'slideOutLeft'}
         hasBackdrop={false}>
-        <View style={{flex: 1, backgroundColor: 'white', paddingTop: 16}}>
+        <View style={{flex: 1, backgroundColor: '#F2F2F2', paddingTop: 16}}>
           <Pressable onPress={toggleModal}>
             <Image
               source={require('../assets/menu_black.png')}

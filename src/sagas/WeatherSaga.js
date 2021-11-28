@@ -1,5 +1,4 @@
-import {call, fork, put, select, take} from 'redux-saga/effects';
-import Config from 'react-native-config';
+import {call, fork, put, select, take, delay} from 'redux-saga/effects';
 
 import {
   getCurrentWeather,
@@ -7,20 +6,19 @@ import {
   setCurrentWeather,
   setForecastWeather,
   setImage,
+  setLoading,
 } from '../redux/WeatherState';
 import {Network} from '../api/Network';
 import {formWeatherData, handleForeCastResponse} from '../utils/WeatherUtils';
 
 function* handleCurrentWeatherRequest(city) {
   try {
-    console.log('saga', city);
     const weatherResponse = yield call(Network.getWeather, city);
     const {data} = weatherResponse;
     if (data.cod === Number(200)) {
       const weatherData = formWeatherData(data);
       yield put(setCurrentWeather({city, weatherData}));
     } else {
-      //error
     }
   } catch (e) {
     //error
@@ -32,6 +30,7 @@ function* handleForecastRequest(city) {
     const {data} = forecastResponse;
     if (data.cod === '200') {
       const weatherData = handleForeCastResponse(data.list);
+      yield delay(1000);
       yield put(setForecastWeather({city, weatherData}));
     } else {
       //error
@@ -43,12 +42,7 @@ function* handleForecastRequest(city) {
 
 function* handleCityImageRequest(city) {
   try {
-    const cityResponse = yield call(Network.getCityImage, {
-      query: city,
-      client_id: Config.UNSPLASH_KEY,
-      orientation: 'landscape',
-      per_page: 1,
-    });
+    const cityResponse = yield call(Network.getCityImage, city);
     const {data} = cityResponse;
     if (data.results) {
       const imageURL = data.results[0].urls.small;
@@ -60,7 +54,10 @@ function* handleCityImageRequest(city) {
     //error
   }
 }
-
+function* handleAppLoading() {
+  yield delay(5000);
+  yield put(setLoading(false));
+}
 export function* watcherWeatherSaga() {
   while (true) {
     yield take(getCurrentWeather.type);
@@ -70,5 +67,6 @@ export function* watcherWeatherSaga() {
       yield fork(handleCityImageRequest, cities[i].name);
       yield fork(handleForecastRequest, cities[i].name);
     }
+    yield call(handleAppLoading);
   }
 }

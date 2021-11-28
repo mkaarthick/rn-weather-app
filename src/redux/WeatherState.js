@@ -3,6 +3,7 @@ import {createSlice} from '@reduxjs/toolkit';
 export const weatherState = createSlice({
   name: 'weather',
   initialState: {
+    loading: true,
     metrics: 'c',
     activePage: 0,
     cities: [
@@ -63,6 +64,12 @@ export const weatherState = createSlice({
         activePage: action.payload,
       };
     },
+    setLoading: (state, action) => {
+      return {
+        ...state,
+        loading: action.payload,
+      };
+    },
     setImage: (state, action) => {
       return {
         ...state,
@@ -87,6 +94,7 @@ export const weatherState = createSlice({
 export const selectCities = state => state.weather.cities;
 export const selectIsCelsius = state => state.weather.metrics === 'c';
 export const selectActivePage = state => state.weather.activePage;
+export const selectLoading = state => state.weather.loading;
 
 //Actions
 export const {
@@ -96,6 +104,7 @@ export const {
   setForecastWeather,
   setActivePage,
   setImage,
+  setLoading,
 } = weatherState.actions;
 
 export default weatherState.reducer;

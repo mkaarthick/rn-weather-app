@@ -32,7 +32,6 @@ const styles = StyleSheet.create({
   center: {
     justifyContent: 'center',
     alignItems: 'center',
-    alignContent: 'center',
     padding: 20,
   },
   otherStyle: {

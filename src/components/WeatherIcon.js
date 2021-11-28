@@ -4,7 +4,6 @@ import {Surface} from 'react-native-paper';
 import {getArtResourceForWeatherCondition} from '../utils/WeatherUtils';
 
 const WeatherIcon = ({type, shadow}) => {
-  console.log('render icon');
   const id = getArtResourceForWeatherCondition(type);
   if (shadow) {
     return (

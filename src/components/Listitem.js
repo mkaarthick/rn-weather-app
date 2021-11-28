@@ -7,11 +7,9 @@ import {convertToFahrenheit} from '../utils/WeatherUtils';
 import {selectIsCelsius} from '../redux/WeatherState';
 
 const ListItem = ({name, description, temp, weatherId, onPress}) => {
-  console.log('render ListItem');
   const isCelsiusSelected = useSelector(selectIsCelsius);
 
   const onClick = () => onPress(name);
-  console.log('render CityList');
 
   return (
     <Pressable style={styles.container} onPress={onClick}>

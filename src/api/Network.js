@@ -18,6 +18,13 @@ export const Network = {
         q: city,
       },
     }),
-  getCityImage: params =>
-    API.get('https://api.unsplash.com/search/photos', {params}),
+  getCityImage: city =>
+    API.get('https://api.unsplash.com/search/photos', {
+      params: {
+        query: city,
+        client_id: Config.UNSPLASH_KEY,
+        orientation: 'landscape',
+        per_page: 1,
+      },
+    }),
 };

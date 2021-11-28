@@ -11,7 +11,6 @@ const renderSeparator = () => <View style={styles.separatorStyle} />;
 
 const CityList = ({selectedCity}) => {
   const cities = useSelector(selectCities);
-  console.log('render CityList', cities);
 
   const onListItemClick = useCallback(
     city => {

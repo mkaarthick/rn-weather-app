@@ -11,7 +11,6 @@ export const Forecast = () => {
   const activePage = useSelector(selectActivePage);
   const cities = useSelector(selectCities);
   const data = cities[activePage].forecast;
-
   const renderItem = ({item}) => {
     return (
       <View style={styles.container}>
@@ -39,7 +38,7 @@ export const Forecast = () => {
       <FlatList
         data={data}
         renderItem={renderItem}
-        keyExtractor={item => item.name}
+        keyExtractor={item => item.date}
         ItemSeparatorComponent={renderSeparator}
       />
     </View>
