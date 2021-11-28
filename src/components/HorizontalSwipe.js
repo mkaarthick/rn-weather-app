@@ -2,30 +2,25 @@ import React from 'react';
 import {Animated, Dimensions, StyleSheet, View} from 'react-native';
 import {ExpandingDot} from 'react-native-animated-pagination-dots';
 import PagerView from 'react-native-pager-view';
+
 import {VerticalSwipe} from './VerticalSwipe';
 import {Forecast} from './Forecast';
 import CityName from './CityName';
-const INTRO_DATA = [
-  {
-    key: '1',
-  },
-  {
-    key: '2',
-  },
-];
+
+const HORIZONTAL_DATA = [{key: '1'}, {key: '2'}];
 const AnimatedPagerView = Animated.createAnimatedComponent(PagerView);
 const width = Dimensions.get('window').width;
 export const HorizontalSwipe = () => {
   const ref = React.useRef();
   const scrollOffsetAnimatedValue = React.useRef(new Animated.Value(0)).current;
   const positionAnimatedValue = React.useRef(new Animated.Value(0)).current;
-  const inputRange = [0, INTRO_DATA.length];
+  const inputRange = [0, HORIZONTAL_DATA.length];
   const scrollX = Animated.add(
     scrollOffsetAnimatedValue,
     positionAnimatedValue,
   ).interpolate({
     inputRange,
-    outputRange: [0, INTRO_DATA.length * width],
+    outputRange: [0, HORIZONTAL_DATA.length * width],
   });
 
   const onPageScroll = React.useMemo(function () {
@@ -50,7 +45,7 @@ export const HorizontalSwipe = () => {
         <View style={styles.dotContainer}>
           <CityName />
           <ExpandingDot
-            data={INTRO_DATA}
+            data={HORIZONTAL_DATA}
             expandingDotWidth={20}
             scrollX={scrollX}
             inActiveDotOpacity={0.6}

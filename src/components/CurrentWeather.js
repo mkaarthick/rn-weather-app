@@ -1,6 +1,12 @@
 import React from 'react';
 import {Image, StyleSheet, Text, View} from 'react-native';
-import {getArtResourceForWeatherCondition} from '../utils/WeatherUtils';
+import {useSelector} from 'react-redux';
+
+import {
+  convertToFahrenheit,
+  getArtResourceForWeatherCondition,
+} from '../utils/WeatherUtils';
+import {selectIsCelsius} from '../redux/WeatherState';
 
 const CurrentWeather = ({
   weatherId,
@@ -13,14 +19,37 @@ const CurrentWeather = ({
   pressure,
 }) => {
   const imgSrc = getArtResourceForWeatherCondition(weatherId);
+  const isCelsiusSelected = useSelector(selectIsCelsius);
+  {
+    isCelsiusSelected
+      ? Math.floor(temp)
+      : Math.floor(convertToFahrenheit(temp));
+  }
   return (
     <View>
       <View style={styles.center}>
         <Image style={styles.weatherIconStyle} source={imgSrc} />
-        <Text style={styles.tempStyle}>{Math.floor(temp)}°</Text>
+        <View style={styles.flexRow}>
+          <Text style={styles.tempStyle}>
+            {isCelsiusSelected
+              ? Math.floor(temp)
+              : Math.floor(convertToFahrenheit(temp))}
+            °
+          </Text>
+          <Text style={styles.metricStyle}>
+            {isCelsiusSelected ? 'C' : 'F'}
+          </Text>
+        </View>
         <Text>{desc}</Text>
         <Text>
-          {Math.floor(min)}° {Math.floor(max)}°
+          {isCelsiusSelected
+            ? Math.floor(min)
+            : Math.floor(convertToFahrenheit(temp))}
+          °{' '}
+          {isCelsiusSelected
+            ? Math.floor(max)
+            : Math.floor(convertToFahrenheit(temp))}
+          °
         </Text>
       </View>
       <View style={styles.bottomContainer}>
@@ -57,6 +86,7 @@ const styles = StyleSheet.create({
   },
   otherStyle: {
     fontSize: 18,
+    marginTop: 8,
   },
   iconStyle: {
     width: 32,
@@ -75,6 +105,13 @@ const styles = StyleSheet.create({
   },
   bottomDetails: {
     alignItems: 'center',
+  },
+  metricStyle: {
+    marginTop: 10,
+    marginLeft: 4,
+  },
+  flexRow: {
+    flexDirection: 'row',
   },
 });
 export default React.memo(CurrentWeather);

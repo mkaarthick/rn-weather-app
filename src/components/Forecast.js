@@ -1,15 +1,22 @@
 import React from 'react';
 import {View, FlatList, StyleSheet} from 'react-native';
 import {useSelector} from 'react-redux';
-import {selectActivePage, selectCities} from '../redux/WeatherState';
+import {
+  selectActivePage,
+  selectCities,
+  selectIsCelsius,
+} from '../redux/WeatherState';
 import {Text} from 'react-native-paper';
 import WeatherIcon from './WeatherIcon';
 import moment from 'moment';
+import {convertToFahrenheit} from '../utils/WeatherUtils';
 const renderSeparator = () => <View style={styles.separatorStyle} />;
 
 export const Forecast = () => {
   const activePage = useSelector(selectActivePage);
   const cities = useSelector(selectCities);
+  const isCelsiusSelected = useSelector(selectIsCelsius);
+
   const data = cities[activePage].forecast;
   const renderItem = ({item}) => {
     return (
@@ -27,8 +34,18 @@ export const Forecast = () => {
         </View>
 
         <View style={styles.tempContainer}>
-          <Text style={styles.tempStyle}>{Math.floor(item.max_temp)}°</Text>
-          <Text style={styles.tempStyle}>{Math.floor(item.min_temp)}°</Text>
+          <Text style={styles.tempStyle}>
+            {isCelsiusSelected
+              ? Math.floor(item.max_temp)
+              : Math.floor(convertToFahrenheit(item.max_temp))}
+            °
+          </Text>
+          <Text style={styles.tempStyle}>
+            {isCelsiusSelected
+              ? Math.floor(item.min_temp)
+              : Math.floor(convertToFahrenheit(item.min_temp))}
+            °
+          </Text>
         </View>
       </View>
     );
