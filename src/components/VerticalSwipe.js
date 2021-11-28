@@ -11,8 +11,10 @@ import CurrentWeather from './CurrentWeather';
 
 export const VerticalSwipe = () => {
   const dispatch = useDispatch();
+
   const cities = useSelector(selectCities);
   const activePage = useSelector(selectActivePage);
+
   const onPageSelectedPosition = useRef(new Animated.Value(0)).current;
   const verticalViewPager = useRef();
 

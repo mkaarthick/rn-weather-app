@@ -17,7 +17,11 @@ const App = () => {
   return (
     <StoreProvider store={store}>
       <View style={styles.flexContainer}>
-        <StatusBar barStyle="light-content" />
+        <StatusBar
+          barStyle="light-content"
+          translucent={true}
+          backgroundColor={'transparent'}
+        />
         <AppNavigation />
       </View>
     </StoreProvider>

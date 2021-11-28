@@ -7,7 +7,7 @@ const WeatherIcon = ({type, shadow}) => {
   const id = getArtResourceForWeatherCondition(type);
   if (shadow) {
     return (
-      <Surface style={styles.surfaceContainer}>
+      <Surface style={styles.surfaceContainer} elevation={10}>
         <Image source={id} style={styles.imageStyle} />
       </Surface>
     );

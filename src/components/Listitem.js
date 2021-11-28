@@ -12,19 +12,22 @@ const ListItem = ({name, description, temp, weatherId, onPress}) => {
   const onClick = () => onPress(name);
 
   return (
-    <Pressable style={styles.container} onPress={onClick}>
-      <Text style={styles.tempStyle}>
-        {isCelsiusSelected
-          ? Math.floor(temp)
-          : Math.floor(convertToFahrenheit(temp))}
-        °
-      </Text>
-      <View style={styles.titleContainer}>
-        <Text style={styles.titleStyle}>{name}</Text>
-        <Text style={styles.descriptionStyle}>{description}</Text>
-      </View>
-      <WeatherIcon type={weatherId} />
-    </Pressable>
+    <View>
+      <Pressable style={styles.container} onPress={onClick}>
+        <Text style={styles.tempStyle}>
+          {isCelsiusSelected
+            ? Math.floor(temp)
+            : Math.floor(convertToFahrenheit(temp))}
+          °
+        </Text>
+        <View style={styles.titleContainer}>
+          <Text style={styles.titleStyle}>{name}</Text>
+          <Text style={styles.descriptionStyle}>{description}</Text>
+        </View>
+        <WeatherIcon type={weatherId} shadow />
+      </Pressable>
+      <View style={styles.separatorStyle} />
+    </View>
   );
 };
 
@@ -49,6 +52,9 @@ const styles = StyleSheet.create({
   },
   descriptionStyle: {
     fontSize: 14,
+  },
+  separatorStyle: {
+    height: 25,
   },
 });
 

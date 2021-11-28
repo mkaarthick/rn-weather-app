@@ -17,7 +17,7 @@ const Metrics = () => {
   };
 
   return (
-    <Surface style={styles.container}>
+    <Surface style={styles.container} elevation={20}>
       <IconButton
         icon={() => (
           <Text

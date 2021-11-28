@@ -5,10 +5,7 @@ import {ActivityIndicator, Surface} from 'react-native-paper';
 import {useDispatch, useSelector} from 'react-redux';
 
 import {HorizontalSwipe} from '../components/HorizontalSwipe';
-import {
-  getCurrentWeather,
-  selectLoading,
-} from '../redux/WeatherState';
+import {getCurrentWeather, selectLoading} from '../redux/WeatherState';
 import CityImage from '../components/CityImage';
 
 export const Dashboard = () => {

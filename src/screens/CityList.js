@@ -1,13 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, {useCallback} from 'react';
-import {FlatList, View, StyleSheet} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 
 import ListItem from '../components/Listitem';
 import {selectCities, setActivePage} from '../redux/WeatherState';
 import Metrics from '../components/Metrics';
-
-const renderSeparator = () => <View style={styles.separatorStyle} />;
+import {AnimatedFlatList, AnimationType} from 'flatlist-intro-animations';
 
 const CityList = ({selectedCity}) => {
   const dispatch = useDispatch();
@@ -35,11 +34,11 @@ const CityList = ({selectedCity}) => {
   };
   return (
     <View style={styles.container}>
-      <FlatList
+      <AnimatedFlatList
         data={cities}
         renderItem={renderItem}
         keyExtractor={item => item.name}
-        ItemSeparatorComponent={renderSeparator}
+        animationType={AnimationType.SlideFromRight}
       />
       <Metrics />
     </View>
