@@ -48,6 +48,7 @@ export const VerticalSwipe = () => {
       onPageSelected={onPageSelected}
       orientation={'vertical'}>
       {cities.map((item, index) => {
+        console.log(item.current);
         return (
           <View key={index.toString()}>
             <CurrentWeather
@@ -57,6 +58,8 @@ export const VerticalSwipe = () => {
               min={item?.current.min_temp}
               max={item?.current.max_temp}
               humidity={item?.current.humidity}
+              pressure={item?.current.pressure}
+              wind={item?.current.wind.speed}
             />
           </View>
         );

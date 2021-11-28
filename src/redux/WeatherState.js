@@ -7,7 +7,6 @@ export const weatherState = createSlice({
     metrics: 'c',
     activePage: 0,
     cities: [
-      {name: 'Cuddalore', current: null, forecast: null, image: null},
       {name: 'Singapore', current: null, forecast: null, image: null},
       {name: 'New York', current: null, forecast: null, image: null},
       {name: 'Miami', current: null, forecast: null, image: null},
