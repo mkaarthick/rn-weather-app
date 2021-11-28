@@ -1,12 +1,12 @@
 import React from 'react';
 import {View, FlatList, StyleSheet} from 'react-native';
+import {Text} from 'react-native-paper';
 import {useSelector} from 'react-redux';
 import {
   selectActivePage,
   selectCities,
   selectIsCelsius,
 } from '../redux/WeatherState';
-import {Text} from 'react-native-paper';
 import WeatherIcon from './WeatherIcon';
 import moment from 'moment';
 import {convertToFahrenheit} from '../utils/WeatherUtils';
@@ -78,8 +78,8 @@ const styles = StyleSheet.create({
     textAlign: 'left',
   },
   dayStyle: {
-    fontWeight: '600',
     fontSize: 16,
+    fontFamily: 'ProximaNova-Semibold',
   },
   dateStyle: {
     fontSize: 14,

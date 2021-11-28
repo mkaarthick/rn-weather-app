@@ -9,21 +9,32 @@
 import React from 'react';
 import {View, StyleSheet, StatusBar} from 'react-native';
 import {Provider as StoreProvider} from 'react-redux';
+import {
+  configureFonts,
+  DefaultTheme,
+  Provider as PaperProvider,
+} from 'react-native-paper';
 
 import AppNavigation from './src/navigation/AppNavigation';
 import store from './src/redux/Store';
-
+import {fontConfig} from './src/utils/Fontconfig';
+const theme = {
+  ...DefaultTheme,
+  fonts: configureFonts(fontConfig),
+};
 const App = () => {
   return (
     <StoreProvider store={store}>
-      <View style={styles.flexContainer}>
-        <StatusBar
-          barStyle="light-content"
-          translucent={true}
-          backgroundColor={'transparent'}
-        />
-        <AppNavigation />
-      </View>
+      <PaperProvider theme={theme}>
+        <View style={styles.flexContainer}>
+          <StatusBar
+            barStyle="light-content"
+            translucent={true}
+            backgroundColor={'transparent'}
+          />
+          <AppNavigation />
+        </View>
+      </PaperProvider>
     </StoreProvider>
   );
 };

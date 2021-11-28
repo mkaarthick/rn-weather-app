@@ -1,5 +1,6 @@
 import React from 'react';
-import {Text, View, Pressable, StyleSheet} from 'react-native';
+import {View, Pressable, StyleSheet} from 'react-native';
+import {Text} from 'react-native-paper';
 import {useSelector} from 'react-redux';
 
 import WeatherIcon from './WeatherIcon';
@@ -41,14 +42,15 @@ const styles = StyleSheet.create({
     fontSize: 45,
     flex: 0.4,
     textAlign: 'center',
+    fontFamily: 'ProximaNova-light',
   },
   titleContainer: {
     flex: 1,
     marginLeft: 12,
   },
   titleStyle: {
-    fontSize: 16,
-    fontWeight: '600',
+    fontSize: 18,
+    fontFamily: 'ProximaNova-Semibold',
   },
   descriptionStyle: {
     fontSize: 14,

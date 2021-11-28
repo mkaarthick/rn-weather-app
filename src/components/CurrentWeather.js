@@ -1,5 +1,6 @@
 import React from 'react';
-import {Image, StyleSheet, Text, View} from 'react-native';
+import {Image, StyleSheet, View} from 'react-native';
+import {Text} from 'react-native-paper';
 import {useSelector} from 'react-redux';
 
 import {
@@ -97,7 +98,8 @@ const styles = StyleSheet.create({
     height: 120,
   },
   tempStyle: {
-    fontSize: 50,
+    fontSize: 60,
+    fontFamily: 'ProximaNova-Light',
   },
   bottomContainer: {
     flexDirection: 'row',
@@ -109,6 +111,8 @@ const styles = StyleSheet.create({
   metricStyle: {
     marginTop: 10,
     marginLeft: 4,
+    fontSize: 18,
+    fontFamily: 'ProximaNova-Semibold',
   },
   flexRow: {
     flexDirection: 'row',

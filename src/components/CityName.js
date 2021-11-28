@@ -15,6 +15,7 @@ const CityName = () => {
 const styles = StyleSheet.create({
   city: {
     fontSize: 22,
+    fontFamily: 'ProximaNova-Semibold',
   },
 });
 export default React.memo(CityName);
