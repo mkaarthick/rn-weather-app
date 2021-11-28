@@ -31,12 +31,11 @@ npm run android
 ### Screenshots
 
 <p float="left">
-  <img src="https://raw.githubusercontent.com/mkaarthick/rn-weather-app/master/screenshots/Simulator%20Screen%20Shot%20-%20iPhone%208%20-%202021-11-28%20at%2019.07.45.png" width="300" />
-  <img src="https://github.com/mkaarthick/rn-weather-app/blob/master/screenshots/Simulator%20Screen%20Shot%20-%20iPhone%208%20-%202021-11-28%20at%2019.07.55.png" width="300" />
-   <img src="https://raw.githubusercontent.com/mkaarthick/rn-weather-app/master/screenshots/Simulator%20Screen%20Shot%20-%20iPhone%208%20-%202021-11-28%20at%2019.07.51.png" width="300" /> 
+  <img src="https://user-images.githubusercontent.com/1816153/143771532-e4964c59-6cf0-464b-afc6-c96e2def5247.png" width="300" /> 
+  <img src="https://user-images.githubusercontent.com/1816153/143771552-53b34cf3-01a3-4892-9240-7c10bff419d3.png" width="300" />
+   <img src="https://user-images.githubusercontent.com/1816153/143771541-95c3aa0b-a7ea-4e65-8a92-0d6e65b8ad5b.png" width="300" />
 </p>
 
-
-
+https://user-images.githubusercontent.com/1816153/143771345-fee0e95e-5753-47ff-a68c-ef283e38b89b.mp4
 
 
